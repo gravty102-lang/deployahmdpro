@@ -1,18 +1,23 @@
 /// <reference types="vitest" />
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import path from 'path';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
   test: {
     environment: 'jsdom',
     globals: true,
   },
   server: {
-    host: '0.0.0.0', // Make accessible from network (required for Android emulator)
+    host: '0.0.0.0',
     port: 5174,
-    strictPort: false, // Allow fallback to other ports if 5174 is in use
+    strictPort: false,
   },
   optimizeDeps: {
     exclude: ['lucide-react'],
